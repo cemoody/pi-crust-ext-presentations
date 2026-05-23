@@ -1,0 +1,31 @@
+{
+  "name": "@cemoody/pi-crust-ext-presentations",
+  "version": "0.1.0",
+  "description": "Slide-deck generation and template-pack discovery for pi-crust.",
+  "license": "MIT",
+  "author": "cemoody",
+  "type": "module",
+  "main": "./server.mjs",
+  "exports": {
+    ".": "./server.mjs"
+  },
+  "files": ["server.mjs", "LICENSE", "README.md", "templates"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cemoody/pi-crust-ext-presentations.git"
+  },
+  "homepage": "https://github.com/cemoody/pi-crust-ext-presentations#readme",
+  "bugs": {
+    "url": "https://github.com/cemoody/pi-crust-ext-presentations/issues"
+  },
+  "keywords": ["pi-crust", "pi-crust-extension", "pi.dev"],
+  "engines": {
+    "node": ">=22"
+  },
+  "piRemoteControl": {
+    "extension": "./server.mjs"
+  },
+  "piCrust": {
+    "extension": "./server.mjs"
+  }
+}
