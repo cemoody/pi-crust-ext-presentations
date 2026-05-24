@@ -30,6 +30,16 @@ export default async function activate(prc) {
   // available immediately after activate() resolves).
   await rescanTemplatePacks().catch(() => undefined);
 
+  // Contribute a Settings section so the pi-crust Settings panel can render
+  // template-directory management without the host hardcoding any of it.
+  // The actual UI lives in `presentations.web.mjs` (loaded via webModuleUrl).
+  prc.settings?.registerSection?.({
+    id: 'core.presentations.settings',
+    title: 'Presentation templates',
+    order: 50,
+    description: 'Folders scanned for template packs. Each must contain a pack.json manifest and a render.mjs entry. Changes are picked up automatically.',
+  });
+
   // Watch each configured dir for pack.json / render.mjs changes and rescan.
   const watchers = [];
   const settingsWatch = await startSettingsWatcher();
