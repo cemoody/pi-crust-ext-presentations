@@ -34,6 +34,9 @@
   "engines": {
     "node": ">=22"
   },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
   "piRemoteControl": {
     "extension": "./server.mjs",
     "web": "./presentations.web.mjs"

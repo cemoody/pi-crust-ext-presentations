@@ -1,0 +1,7 @@
+{
+  "id": "alpha",
+  "name": "Alpha Pack",
+  "version": "0.0.1",
+  "entry": "./render.mjs",
+  "layouts": ["title", "bullets"]
+}
