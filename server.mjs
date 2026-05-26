@@ -421,13 +421,19 @@ function validateDeck(value) {
   if (!Array.isArray(value.slides) || value.slides.length === 0) {
     errors.push('slides must be a non-empty array');
   } else {
+    // A non-empty `templatePack` means slide.html is resolved later from
+    // slide.layout by the registered template pack's renderer. Treat a
+    // layout-only slide as having visible content in that case so callers
+    // don't have to also synthesise placeholder title/body strings.
+    const hasTemplatePack = typeof value.templatePack === 'string' && value.templatePack.trim() !== '';
     value.slides.forEach((slide, i) => {
       if (!slide || typeof slide !== 'object') { errors.push(`slides[${i}] must be an object`); return; }
       const hasContent = ['title','subtitle','body','quote','html'].some((k) => typeof slide[k] === 'string' && slide[k].trim() !== '')
         || (Array.isArray(slide.bullets) && slide.bullets.length > 0)
         || (Array.isArray(slide.columns) && slide.columns.length > 0)
         || (Array.isArray(slide.stats) && slide.stats.length > 0)
-        || (slide.image && typeof slide.image === 'object');
+        || (slide.image && typeof slide.image === 'object')
+        || (hasTemplatePack && typeof slide.layout === 'string' && slide.layout.trim() !== '');
       if (!hasContent) errors.push(`slides[${i}] must contain visible content`);
     });
   }
